@@ -1,0 +1,104 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Product Image -->
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shoes1" />
+
+        <!-- Product Title -->
+        <TextView
+            android:id="@+id/product_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Tata 1mg Healthy Ayurvedic Juices Pack"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Product Quantity -->
+        <TextView
+            android:id="@+id/product_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1 Kit"
+            android:textColor="#666"
+            android:textSize="14sp" />
+
+        <!-- Delivery Time -->
+        <TextView
+            android:id="@+id/product_delivery_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get by 11pm, Tomorrow"
+            android:textColor="#666"
+            android:textSize="14sp" />
+
+        <!-- Price and Discount -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹459"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/product_original_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="₹685"
+                android:textColor="#999"
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/product_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="33% off"
+                android:textColor="#4CAF50"
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <!-- Add Button -->
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="ADD"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FF5722" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
