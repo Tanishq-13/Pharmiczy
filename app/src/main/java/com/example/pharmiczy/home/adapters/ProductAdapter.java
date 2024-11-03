@@ -13,16 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.pharmiczy.R;
+import com.example.pharmiczy.home.activity.ProductDetailActivity;
 import com.example.pharmiczy.home.models.Product;
+import com.example.pharmiczy.home.models.ProductFetch;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    private List<Product> productList;
+    private List<ProductFetch> productList;
     private Context context;
 
-    public ProductAdapter(Context context, List<Product> productList) {
+    public ProductAdapter(Context context, List<ProductFetch> productList) {
         this.context = context;
         this.productList = productList;
     }
@@ -36,17 +38,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product product = productList.get(position);
+        ProductFetch product = productList.get(position);
 
         // Load image using Glide
         Glide.with(context)
-                .load(product.getImageUrl())
+                .load(product.getImage())
                 .into(holder.imageView);
 
-        holder.titleTextView.setText(product.getTitle());
+        holder.titleTextView.setText(product.getName());
         holder.descriptionTextView.setText(product.getDescription());
-        holder.priceTextView.setText(product.getPrice());
+        holder.priceTextView.setText("₹" + product.getPrice());
+
+        // Set click listener to open ProductDetailActivity
+        holder.itemView.setOnClickListener(v -> ProductDetailActivity.start(context, product));
     }
+
 
     @Override
     public int getItemCount() {
