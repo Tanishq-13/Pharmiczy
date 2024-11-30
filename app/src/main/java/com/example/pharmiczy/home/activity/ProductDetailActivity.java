@@ -19,6 +19,7 @@ import com.example.pharmiczy.R;
 import com.example.pharmiczy.home.models.ProductFetch;
 
 public class ProductDetailActivity extends AppCompatActivity {
+
     private ImageView productImageView;
     private TextView titleTextView, descriptionTextView, priceTextView, originalPriceTextView, discountTextView;
 
@@ -51,7 +52,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             titleTextView.setText(product.getName());
 //            descriptionTextView.setText(product.getDescription());
             originalPriceTextView.setText("₹" +product.getOriginalPrice());
-            discountTextView.setText(""+product.getDiscount()+"%");
+            discountTextView.setText("("+product.getDiscount()+"%"+" off)");
             priceTextView.setText("₹" + product.getPrice());
         }
     }
@@ -62,18 +63,18 @@ public class ProductDetailActivity extends AppCompatActivity {
         intent.putExtra("product", product);
         context.startActivity(intent);
     }
-    public void onQuantityClick(View view) {
-        // Example: show a simple list dialog for quantity selection
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Quantity");
-
-        String[] quantities = {"30 Softgels", "60 Softgels", "90 Softgels"};
-        builder.setItems(quantities, (dialog, which) -> {
-            // Update selected quantity in TextView
-            TextView quantityTextView = findViewById(R.id.selected_quantity);
-            quantityTextView.setText(quantities[which]);
-        });
-
-        builder.show();
-    }
+//    public void onQuantityClick(View view) {
+//        // Example: show a simple list dialog for quantity selection
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Select Quantity");
+//
+//        String[] quantities = {"30 Softgels", "60 Softgels", "90 Softgels"};
+//        builder.setItems(quantities, (dialog, which) -> {
+//            // Update selected quantity in TextView
+//            TextView quantityTextView = findViewById(R.id.selected_quantity);
+//            quantityTextView.setText(quantities[which]);
+//        });
+//
+//        builder.show();
+//    }
 }
