@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Pharmiczy"
         tools:targetApi="31">
         <activity
+            android:name=".cart.cartActivity"
+            android:exported="false" />
+        <activity
             android:name=".home.activity.ProductDetailActivity"
             android:exported="false" />
         <activity
