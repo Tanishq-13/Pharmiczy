@@ -65,7 +65,8 @@
         app:layout_constraintTop_toBottomOf="@id/view1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,7 +105,7 @@
                     android:id="@+id/product_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="50"
+                    android:text="₹ 50"
                     android:fontFamily="sans-serif-medium"
                     android:textColor="#292D32"
                     android:textSize="22dp" />
@@ -337,16 +338,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                <TextView
-                    android:layout_marginStart="4dp"
-                    android:layout_width="wrap_content"
-                    android:textSize="14dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_height="wrap_content"
-                    android:text="Product: "
-                    android:fontFamily="sans-serif-medium"
-                    android:textColor="@color/grey_dark"/>
                     <TextView
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:text="Product: "
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/grey_dark"/>
+                    <TextView
+                        android:id="@+id/prodName"
                         android:layout_marginStart="4dp"
                         android:layout_width="wrap_content"
                         android:textSize="14dp"
@@ -356,6 +358,138 @@
                         android:fontFamily="sans-serif-medium"
                         android:textColor="@color/black"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:text="Composition: "
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/grey_dark"/>
+                    <TextView
+                        android:id="@+id/composition"
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_height="wrap_content"
+                        android:text="Loading... "
+
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:text="Dosage: "
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/grey_dark"/>
+                    <TextView
+                        android:id="@+id/dosage"
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_height="wrap_content"
+                        android:text="Tablet, 10mg "
+
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:text="Minimum Order quantity: "
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/grey_dark"/>
+                    <TextView
+                        android:id="@+id/minOrder"
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_height="wrap_content"
+                        android:text="10 packs "
+
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:text="Pack Size: "
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/grey_dark"/>
+
+                    <TextView
+                        android:id="@+id/packSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="10 Tablets"
+
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:text="Drug Type: "
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/grey_dark"/>
+                    <TextView
+                        android:id="@+id/drugType"
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_height="wrap_content"
+                        android:text="Loading..."
+
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+
                 <TextView
                     android:layout_marginStart="4dp"
                     android:layout_width="wrap_content"
@@ -368,13 +502,14 @@
                     android:textColor="@color/grey_dark"/>
 
                 <TextView
+                    android:id="@+id/Description"
                     android:layout_marginStart="4dp"
                     android:layout_width="wrap_content"
                     android:textSize="14dp"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center_vertical"
                     android:layout_height="wrap_content"
-                    android:text="Featuring two sets of coins, strikers, and powder, this carrom board is designed to provide everything you need for a complete game right out of the box. The inclusion of two sets of coins ensures that you can easily accommodate multiple players, making it ideal for family gatherings or friendly competitions. With the additional strikers and powder, the setup process is streamlined, allowing you to focus on enjoying the game rather than preparing it."
+                    android:text="Used to relieve allergy symptoms such as watery eyes, runny nose, itching eyes/nose, and sneezing."
                     android:fontFamily="sans-serif-medium"
                     android:textColor="@color/black"/>
             </LinearLayout>
@@ -442,4 +577,49 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/colorAccent"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/add_to_cart_btn"
+            android:background="#E5E7E9 "
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="ADD TO CART"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:drawableTint="#485F70"
+                android:textColor="#485F70"
+                android:drawableEnd="@mipmap/cart_black"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buy_now_btn"
+            android:text="BUY NOW"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:stateListAnimator="@null"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
@@ -16,7 +16,7 @@
         <!-- Product Image -->
         <ImageView
             android:id="@+id/product_image"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="120dp"
             android:scaleType="centerCrop"
             android:src="@drawable/shoes1" />
@@ -37,20 +37,13 @@
         <!-- Product Quantity -->
         <TextView
             android:id="@+id/product_quantity"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1 Kit"
             android:textColor="#666"
             android:textSize="14sp" />
 
         <!-- Delivery Time -->
-        <TextView
-            android:id="@+id/product_delivery_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Get by 11pm, Tomorrow"
-            android:textColor="#666"
-            android:textSize="14sp" />
 
         <!-- Price and Discount -->
         <LinearLayout

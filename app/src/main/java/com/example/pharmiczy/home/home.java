@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pharmiczy.Apis.ApiClient;
+import com.example.pharmiczy.DataModels.Medicine;
 import com.example.pharmiczy.R;
 import com.example.pharmiczy.home.adapters.CategoryAdapter;
 import com.example.pharmiczy.home.adapters.ProductAdapter;
@@ -87,26 +89,21 @@ public class home extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         // Initialize Retrofit and fetch products
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        productapi apiService = retrofit.create(productapi.class);
-        fetchProducts(apiService);
+        fetchProducts();
     }
 
-    private void fetchProducts(productapi apiService) {
-        Call<List<ProductFetch>> call = apiService.getProducts();
+    private void fetchProducts() {
+//        Call<List<Product>> call = apiService.getProducts();
 
-        call.enqueue(new Callback<List<ProductFetch>>() {
+        ApiClient.getApiService().getMedicines().enqueue(new Callback<List<Medicine>>() {
             @Override
-            public void onResponse(Call<List<ProductFetch>> call, Response<List<ProductFetch>> response) {
+            public void onResponse(Call<List<Medicine>> call, Response<List<Medicine>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<ProductFetch> productList = response.body();
+                    List<Medicine> productList = response.body();
                     // Set up the adapter with fetched data
-                    for (ProductFetch product : productList) {
-                        Log.d("Product", "Name: " + product.getName() + ", Price: " + product.getPrice());
+                    for (Medicine product : productList) {
+                        Log.d("Product", "Name: " + product.getProductName() + ", Price: " + product.getPricing().sellingPrice);
                     }
                     adapter = new ProductAdapter(home.this, productList);
                     recyclerView.setAdapter(adapter);
@@ -116,9 +113,10 @@ public class home extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<ProductFetch>> call, Throwable t) {
-                Log.e("Error", "Network request failed", t);
+            public void onFailure(Call<List<Medicine>> call, Throwable t) {
+
             }
+
         });
     }
 }

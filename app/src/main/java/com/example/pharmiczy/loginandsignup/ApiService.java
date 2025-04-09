@@ -1,7 +1,7 @@
 package com.example.pharmiczy.loginandsignup;
 
+import com.example.pharmiczy.Apis.responses.LoginResponse;
 import com.example.pharmiczy.loginandsignup.datamodels.LoginRequest;
-import com.example.pharmiczy.loginandsignup.datamodels.LoginResponse;
 import com.example.pharmiczy.loginandsignup.datamodels.SignupRequest;
 
 import retrofit2.Call;
@@ -15,7 +15,7 @@ public interface ApiService {
     Call<Void> signup(@Body SignupRequest request);  // No response body expected
     @Headers("Content-Type: application/json")
 
-    @POST("/api/user/login") // Adjust based on your backend route
+    @POST("/api/auth/login") // Adjust based on your backend route
     Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
 }
 

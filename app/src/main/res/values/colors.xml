@@ -8,8 +8,12 @@
     <color name="green">#00CF73</color>
     <color name="green2">#00B75F</color>
     <color name="grey">#4D556A</color>
+    <color name="unselected">#353535</color>
+
     <!-- colors.xml -->\
     <color name="grey_dark">#606060</color> <!-- Dark grey for label text -->
     <color name="grey_light">#D3D3D3</color> <!-- Light grey for border -->
     <color name="purple">#874AFF</color>
+    <color name="recyclerviewBackground">#d6d6d6</color>
+    <color name="RecyclerViewsBackground">#d6d6d6</color>
 </resources>

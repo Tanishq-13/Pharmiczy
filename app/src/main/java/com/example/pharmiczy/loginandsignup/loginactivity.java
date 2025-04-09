@@ -1,6 +1,7 @@
 package com.example.pharmiczy.loginandsignup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,10 +15,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.pharmiczy.Apis.responses.LoginResponse;
 import com.example.pharmiczy.R;
+import com.example.pharmiczy.home.HomeActivity1;
 import com.example.pharmiczy.home.home;
 import com.example.pharmiczy.loginandsignup.datamodels.LoginRequest;
-import com.example.pharmiczy.loginandsignup.datamodels.LoginResponse;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
@@ -79,9 +81,23 @@ public class loginactivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    LoginResponse loginResponse = response.body();
+
+                    // Cache token and user info
+                    SharedPreferences prefs = getSharedPreferences("pharmiczy_prefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("token", loginResponse.getToken());
+                    Log.d("bearertoken",loginResponse.getToken());
+//                    loginResponse.
+                    editor.putString("userId", loginResponse.getUser().get_id());
+                    editor.putString("email", loginResponse.getUser().getEmail());
+                    editor.putString("role", loginResponse.getUser().getRole());
+                    editor.putString("name", loginResponse.getUser().getName());
+                    editor.apply();
+
                     Toast.makeText(loginactivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(getApplicationContext(), home.class);
-                    startActivity(intent);
+                    startActivity(new Intent(getApplicationContext(), HomeActivity1.class));
+                    finish();
                 } else {
                     Toast.makeText(loginactivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
                 }
@@ -94,4 +110,5 @@ public class loginactivity extends AppCompatActivity {
             }
         });
     }
+
 }
