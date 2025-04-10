@@ -14,5 +14,5 @@ public class AppointmentRequest {
         this.time = time;
     }
 
-    // getters and setters if needed
+    // getters and setters if needed,
 }
