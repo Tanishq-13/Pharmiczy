@@ -1,5 +1,5 @@
 package com.example.pharmiczy.Apis.requests;
-//package com.example.pharmiczy.Apis.requesets;
+//package com.example.pharmiczcy.Apis.requesets;
 
 public class AppointmentRequest {
     private String patientId;
