@@ -40,9 +40,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Medicine product = productList.get(position);
 
         // Load image using Glide
-        Glide.with(context)
-                .load(product.getImages().get(0))
-                .into(holder.imageView);
+//        Glide.with(context)
+//                .load(product.getImages().get(0))
+//                .into(holder.imageView);
 
         holder.titleTextView.setText(product.getProductName());
         holder.descriptionTextView.setText(product.getDescription());

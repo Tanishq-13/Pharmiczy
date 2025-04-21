@@ -4,24 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".home.fragmentss.CartFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_items_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/recyclerviewBackground"
+        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:background="@color/colorAccent"
         android:elevation="8dp"
+        android:background="@color/white"
+
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +66,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/colorPrimary"
             android:text="Continue"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
     </LinearLayout>
