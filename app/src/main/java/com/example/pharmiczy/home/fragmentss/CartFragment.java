@@ -28,6 +28,7 @@ import com.example.pharmiczy.R;
 import com.example.pharmiczy.home.adapters.CartAdapter;
 import com.example.pharmiczy.loginandsignup.RetrofitClient;
 import com.example.pharmiczy.order_placing.Address;
+import com.example.pharmiczy.order_placing.addAddressActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class CartFragment extends Fragment {
         fetchCartItems();
         continu=view.findViewById(R.id.cart_continue_btn);
         continu.setOnClickListener(v -> {
-            Intent intent=new Intent(getActivity(), Address.class);
+            Intent intent=new Intent(getActivity(), addAddressActivity.class);
             startActivity(intent);
         });
         return view;
