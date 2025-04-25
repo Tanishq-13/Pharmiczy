@@ -41,5 +41,10 @@ public interface ApiService {
 
     @POST("/api/orders/place")
     Call<OrderResponse> placeOrder(@Header("Authorization") String token, @Body PlaceOrderRequest request);
+    @POST("api/carts/remove")
+    Call<CartResponse> removeFromCart(
+            @Header("Authorization") String token,
+            @Body CartRequest request
+    );
 
 }
