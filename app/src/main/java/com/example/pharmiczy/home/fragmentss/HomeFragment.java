@@ -1,6 +1,8 @@
 package com.example.pharmiczy.home.fragmentss;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +22,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pharmiczy.Apis.ApiClient;
+import com.example.pharmiczy.Apis.ApiService;
+import com.example.pharmiczy.Apis.responses.AppointmentResponse;
+import com.example.pharmiczy.Apis.responses.Doctor;
+import com.example.pharmiczy.Apis.responses.appresp;
 import com.example.pharmiczy.DataModels.Medicine;
 import com.example.pharmiczy.R;
 import com.example.pharmiczy.cache.MedicineCache;
@@ -27,10 +33,14 @@ import com.example.pharmiczy.home.activity.AllDoctorsActivity;
 import com.example.pharmiczy.home.activity.AllMedicines;
 import com.example.pharmiczy.home.adapters.CategoryAdapter;
 import com.example.pharmiczy.home.adapters.ProductAdapter;
+import com.example.pharmiczy.home.adapters.bkdapntmnt;
+
+import com.example.pharmiczy.home.adapters.homedoctoradapter;
 import com.example.pharmiczy.home.models.Category;
 //import com.example.pharmiczy.home.models.Product;
 import com.example.pharmiczy.home.models.ProductFetch;
 import com.example.pharmiczy.home.productapi;
+import com.example.pharmiczy.loginandsignup.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,10 +56,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
 
     private ProductAdapter productAdapter;
-    private RecyclerView productRecyclerView;
+    private RecyclerView productRecyclerView,doctorss,bkdapntmnt;
     private RecyclerView categoryRecyclerView;
-    private LinearLayout ns,clc,crs;
-
+    private LinearLayout ns,clc,crs,bkdapnht;
+    private bkdapntmnt bkadapter;
+    private List<Doctor> doctorList = new ArrayList<>();
+    List<appresp> appointments =new ArrayList<>();
+    private homedoctoradapter doctorAdapter;
     private final List<Medicine> productList = new ArrayList<>();
     private final List<Category> categoryList = new ArrayList<>();
 
@@ -66,9 +79,54 @@ public class HomeFragment extends Fragment {
             v.setPadding(0, systemInsets.top, 0, systemInsets.bottom);
             return WindowInsetsCompat.CONSUMED;
         });
-
+        doctorss=view.findViewById(R.id.recycler_view3);
+        doctorss.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        doctorAdapter = new homedoctoradapter(doctorList,getContext());
+        doctorss.setAdapter(doctorAdapter);
         categoryRecyclerView = view.findViewById(R.id.recycler_view2);
         productRecyclerView = view.findViewById(R.id.recycler_view);
+
+
+
+        bkdapnht=view.findViewById(R.id.bkdapntmnt);
+        bkdapntmnt=view.findViewById(R.id.recycler_view4);
+        bkdapntmnt.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        bkadapter = new bkdapntmnt(getContext(),appointments);
+        bkdapntmnt.setAdapter(bkadapter);
+
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("pharmiczy_prefs", Context.MODE_PRIVATE);
+        String token = "Bearer " + sharedPreferences.getString("token", null);
+
+        ApiService appointmentApi = RetrofitClient.getClient().create(ApiService.class);
+
+        //fetch upcoming appointments
+        Call<List<appresp>> call = appointmentApi.getAppointments(token);
+
+        call.enqueue(new Callback<List<appresp>>() {
+            @Override
+            public void onResponse(Call<List<appresp>> call, Response<List<appresp>> response) {
+                if (response.isSuccessful()) {
+                    appointments.addAll(response.body());
+
+                    if(appointments.size()>0){
+                        bkdapnht.setVisibility(View.VISIBLE);
+                        bkdapntmnt.setVisibility(View.VISIBLE);
+                    }
+                    bkadapter.notifyDataSetChanged();
+                    for (appresp appointment : appointments) {
+                        Log.d("Appointment", "Doctor Name: " + appointment.getDoctorId().getName());
+                    }
+                } else {
+                    Log.e("Appointment API", "Failed with code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<appresp>> call, Throwable t) {
+                Log.e("Appointment API", "Error: " + t.getMessage());
+            }
+        });
+
 
         setupCategoryRecyclerView();
         setupProductRecyclerView();
@@ -77,6 +135,25 @@ public class HomeFragment extends Fragment {
         if (cachedList != null && !cachedList.isEmpty()) {
             populateFromMedicines(cachedList);
         }
+        //Fetch doctors
+        ApiService api = RetrofitClient.getClient().create(ApiService.class);
+
+        api.getAllDoctors().enqueue(new Callback<List<Doctor>>() {
+            @Override
+            public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    doctorList.clear();
+                    doctorList.addAll(response.body());
+                    doctorAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Doctor>> call, Throwable t) {
+                Log.e("AllDoctors", "Error fetching doctors: " + t.getMessage());
+            }
+        });
+
 
         // Fetch latest medicines
         ApiClient.getApiService().getMedicines().enqueue(new Callback<List<Medicine>>() {

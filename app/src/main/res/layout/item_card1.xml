@@ -40,6 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1 Kit"
+            android:minLines="2"
+            android:maxLines="2"
             android:textColor="#666"
             android:textSize="14sp" />
 

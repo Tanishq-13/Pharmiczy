@@ -245,6 +245,65 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
+                        <LinearLayout
+                            android:id="@+id/bkdapntmnt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Booked Appointments"
+
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"/>
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:text="View All"/>
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view4"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+
+                            android:layout_height="wrap_content"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Doctors"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"/>
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:text="View All"/>
+
+                        </LinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
                     </LinearLayout>
                 </LinearLayout>

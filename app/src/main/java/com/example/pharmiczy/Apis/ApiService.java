@@ -4,11 +4,13 @@ package com.example.pharmiczy.Apis;
 import com.example.pharmiczy.Apis.requests.AppointmentRequest;
 import com.example.pharmiczy.Apis.requests.CartRequest;
 import com.example.pharmiczy.Apis.requests.PlaceOrderRequest;
+import com.example.pharmiczy.Apis.requests.RemoveRequest;
 import com.example.pharmiczy.Apis.responses.AllCartResponse;
 import com.example.pharmiczy.Apis.responses.AppointmentResponse;
 import com.example.pharmiczy.Apis.responses.CartResponse;
 import com.example.pharmiczy.Apis.responses.Doctor;
 import com.example.pharmiczy.Apis.responses.OrderResponse;
+import com.example.pharmiczy.Apis.responses.appresp;
 import com.example.pharmiczy.DataModels.Medicine;
 
 import java.util.List;
@@ -44,7 +46,9 @@ public interface ApiService {
     @POST("api/carts/remove")
     Call<CartResponse> removeFromCart(
             @Header("Authorization") String token,
-            @Body CartRequest request
+            @Body RemoveRequest request
     );
+    @GET("api/appointments/patient")
+    Call<List<appresp>> getAppointments(@Header("Authorization") String token);
 
 }

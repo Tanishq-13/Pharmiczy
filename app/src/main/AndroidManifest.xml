@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Pharmiczy"
         tools:targetApi="31">
         <activity
+            android:name=".home.activity.AppointmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".order_placing.addAddressActivity"
             android:exported="false" />
         <activity
