@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pharmiczy.R;
+import com.example.pharmiczy.home.activity.SearchActivity;
 import com.example.pharmiczy.home.fragmentss.CartFragment;
 import com.example.pharmiczy.home.fragmentss.HomeFragment;
 import com.example.pharmiczy.home.fragmentss.MyOrdersFragment;
@@ -47,7 +48,7 @@ public class HomeActivity1 extends AppCompatActivity implements NavigationView.O
     private static final int ACCOUNT_FRAGMENT = 5;
     public static Boolean showCart = false;
     private FrameLayout frameLayout;
-    private ImageView actionBarLogo;
+    private ImageView actionBarLogo,sb;
     private int currentFragment = -1;
     private NavigationView navigationView;
 
@@ -58,8 +59,11 @@ public class HomeActivity1 extends AppCompatActivity implements NavigationView.O
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         actionBarLogo = findViewById(R.id.actionbar_logo);
 //        setSupportActionBar(toolbar);
-
-
+        sb=findViewById(R.id.sb);
+        sb.setOnClickListener(v -> {
+            Intent intent=new Intent(this, SearchActivity.class);
+            startActivity(intent);
+        });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);

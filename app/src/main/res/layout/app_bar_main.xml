@@ -36,6 +36,8 @@
                 android:layout_gravity="end"
                 android:foreground="?android:attr/selectableItemBackground"/>
 
+
+
             <ImageView
                 android:id="@+id/cart"
                 android:layout_width="wrap_content"
@@ -46,6 +48,15 @@
                 android:layout_marginStart="15dp"
                 android:foreground="?android:attr/selectableItemBackground"/>
 
+
+            <ImageView
+                android:id="@+id/sb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/searchb"
+                android:layout_gravity="end"
+                android:layout_marginStart="15dp"
+                android:foreground="?android:attr/selectableItemBackground"/>
             <ImageView
                 android:id="@+id/actionbar_logo"
                 android:layout_width="wrap_content"
