@@ -27,10 +27,10 @@ public interface ApiService {
     Call<List<Medicine>> getMedicines();
     @GET("medicines/{id}")
     Call<Medicine> getMedicineById(@Path("id") String medicineId);
-    @POST("api/carts/add")
+    @POST("api/cart/add")
     Call<CartResponse> addToCart(@Header("Authorization") String token, @Body CartRequest request);
 
-    @GET("api/carts/")
+    @GET("api/cart/")
     Call<AllCartResponse> getCart(@Header("Authorization") String token);
 
     @GET("/api/auth/doctors")
@@ -43,12 +43,15 @@ public interface ApiService {
 
     @POST("/api/orders/place")
     Call<OrderResponse> placeOrder(@Header("Authorization") String token, @Body PlaceOrderRequest request);
-    @POST("api/carts/remove")
+    @POST("api/cart/remove")
     Call<CartResponse> removeFromCart(
             @Header("Authorization") String token,
             @Body RemoveRequest request
     );
     @GET("api/appointments/patient")
     Call<List<appresp>> getAppointments(@Header("Authorization") String token);
+
+    @GET("/api/orders/")
+    Call<List<OrderResponse.Order>> getMyOrders(@Header("Authorization") String bearerToken);
 
 }

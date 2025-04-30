@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -81,7 +84,36 @@ public class ProductDetailActivity extends AppCompatActivity {
         TextView drugtype = findViewById(R.id.drugType);
 
         Medicine product = (Medicine) getIntent().getSerializableExtra("product");
+        int maxx=product.getStock().quantity;
+        EditText editQuantity = findViewById(R.id.edit_quantity);
+        TextView warningText =findViewById(R.id.warning_text);
 
+        int maxQuantity = maxx; // Set your dynamic max quantity from backend
+        int quantity;
+
+        editQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    int quantity = Integer.parseInt(s.toString());
+                    if (quantity > maxQuantity) {
+                        warningText.setVisibility(View.VISIBLE);
+                    } else {
+                        warningText.setVisibility(View.GONE);
+                    }
+                } catch (NumberFormatException e) {
+                    warningText.setVisibility(View.GONE); // hide when field is empty or invalid
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         if (product != null) {
             // Load image safely
             if (product.getImages() != null && !product.getImages().isEmpty()) {
@@ -153,7 +185,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(v -> {
             String token = "Bearer " + getSharedPreferences("pharmiczy_prefs", MODE_PRIVATE).getString("token", null);
             String medicineId = product != null ? product.getId() : null;
-            int quantity = 1;
+//            int quantity = 1;
 
             if (medicineId == null) {
                 Toast.makeText(this, "Invalid medicine", Toast.LENGTH_SHORT).show();

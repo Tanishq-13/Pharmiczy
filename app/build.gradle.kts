@@ -53,7 +53,7 @@ dependencies {
     implementation("com.intuit.sdp:sdp-android:1.1.0")
     implementation("com.intuit.ssp:ssp-android:1.1.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
-
+    implementation("com.razorpay:checkout:1.6.33")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -28,11 +28,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.pharmiczy.MyOrdersFragment;
 import com.example.pharmiczy.R;
 import com.example.pharmiczy.home.activity.SearchActivity;
 import com.example.pharmiczy.home.fragmentss.CartFragment;
 import com.example.pharmiczy.home.fragmentss.HomeFragment;
-import com.example.pharmiczy.home.fragmentss.MyOrdersFragment;
 import com.example.pharmiczy.loginandsignup.SignupActivity;
 import com.google.android.material.navigation.NavigationView;
 

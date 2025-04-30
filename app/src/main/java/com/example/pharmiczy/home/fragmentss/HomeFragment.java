@@ -106,8 +106,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<appresp>> call, Response<List<appresp>> response) {
                 if (response.isSuccessful()) {
-                    appointments.addAll(response.body());
-
+//                    appointments.addAll(response.body());
+                    List<appresp> allAppointments = response.body();
+                    if (allAppointments != null && !allAppointments.isEmpty()) {
+                        List<appresp> limitedAppointments = allAppointments.size() > 2
+                                ? allAppointments.subList(0, 2)
+                                : allAppointments;
+                        appointments.addAll(limitedAppointments);
+                    }
                     if(appointments.size()>0){
                         bkdapnht.setVisibility(View.VISIBLE);
                         bkdapntmnt.setVisibility(View.VISIBLE);
