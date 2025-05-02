@@ -11,6 +11,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="@dimen/_4sdp"
+    android:background="@drawable/exclusivebg"
     android:orientation="horizontal">
 
 
@@ -115,9 +117,9 @@
         android:src="@drawable/arrowright"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:background="@color/grey"
-        android:layout_marginTop="@dimen/_8sdp"/>
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/_1sdp"-->
+<!--        android:background="@color/grey"-->
+<!--        android:layout_marginTop="@dimen/_8sdp"/>-->
 </LinearLayout>

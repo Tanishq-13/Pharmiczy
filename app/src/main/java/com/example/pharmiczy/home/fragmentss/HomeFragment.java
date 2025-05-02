@@ -1,5 +1,7 @@
 package com.example.pharmiczy.home.fragmentss;
 
+import static com.example.pharmiczy.home.activity.AllAppointmentsActivity.APPOINTMENT_CACHE_KEY;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +32,7 @@ import com.example.pharmiczy.Apis.responses.appresp;
 import com.example.pharmiczy.DataModels.Medicine;
 import com.example.pharmiczy.R;
 import com.example.pharmiczy.cache.MedicineCache;
+import com.example.pharmiczy.home.activity.AllAppointmentsActivity;
 import com.example.pharmiczy.home.activity.AllDoctorsActivity;
 import com.example.pharmiczy.home.activity.AllMedicines;
 import com.example.pharmiczy.home.adapters.CategoryAdapter;
@@ -41,6 +45,7 @@ import com.example.pharmiczy.home.models.Category;
 import com.example.pharmiczy.home.models.ProductFetch;
 import com.example.pharmiczy.home.productapi;
 import com.example.pharmiczy.loginandsignup.RetrofitClient;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,6 +61,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
 
     private ProductAdapter productAdapter;
+    private TextView vwall;
     private RecyclerView productRecyclerView,doctorss,bkdapntmnt;
     private RecyclerView categoryRecyclerView;
     private LinearLayout ns,clc,crs,bkdapnht;
@@ -85,8 +91,11 @@ public class HomeFragment extends Fragment {
         doctorss.setAdapter(doctorAdapter);
         categoryRecyclerView = view.findViewById(R.id.recycler_view2);
         productRecyclerView = view.findViewById(R.id.recycler_view);
-
-
+        vwall=view.findViewById(R.id.poo);
+        vwall.setOnClickListener(v -> {
+            Intent intent=new Intent(getContext(), AllAppointmentsActivity.class);
+            startActivity(intent);
+        });
 
         bkdapnht=view.findViewById(R.id.bkdapntmnt);
         bkdapntmnt=view.findViewById(R.id.recycler_view4);
@@ -106,19 +115,27 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<appresp>> call, Response<List<appresp>> response) {
                 if (response.isSuccessful()) {
-//                    appointments.addAll(response.body());
                     List<appresp> allAppointments = response.body();
                     if (allAppointments != null && !allAppointments.isEmpty()) {
                         List<appresp> limitedAppointments = allAppointments.size() > 2
                                 ? allAppointments.subList(0, 2)
                                 : allAppointments;
+                        appointments.clear();
                         appointments.addAll(limitedAppointments);
+                        bkadapter.notifyDataSetChanged();
+
+                        // ✅ Cache the list
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        String json = new Gson().toJson(limitedAppointments);
+                        editor.putString(APPOINTMENT_CACHE_KEY, json);
+                        editor.apply();
                     }
-                    if(appointments.size()>0){
+
+                    if (!appointments.isEmpty()) {
                         bkdapnht.setVisibility(View.VISIBLE);
                         bkdapntmnt.setVisibility(View.VISIBLE);
                     }
-                    bkadapter.notifyDataSetChanged();
+
                     for (appresp appointment : appointments) {
                         Log.d("Appointment", "Doctor Name: " + appointment.getDoctorId().getName());
                     }
@@ -126,6 +143,7 @@ public class HomeFragment extends Fragment {
                     Log.e("Appointment API", "Failed with code: " + response.code());
                 }
             }
+
 
             @Override
             public void onFailure(Call<List<appresp>> call, Throwable t) {
@@ -180,7 +198,7 @@ public class HomeFragment extends Fragment {
 
         ns=view.findViewById(R.id.newss);
         crs=view.findViewById(R.id.coursess);
-        clc=view.findViewById(R.id.calci);
+//        clc=view.findViewById(R.id.calci);
 
         crs.setOnClickListener(v -> {
             Intent intent=new Intent(getActivity(), AllMedicines.class);

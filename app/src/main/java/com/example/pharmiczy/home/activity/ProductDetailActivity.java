@@ -30,6 +30,7 @@ import com.example.pharmiczy.Apis.responses.CartResponse;
 import com.example.pharmiczy.DataModels.Medicine;
 import com.example.pharmiczy.R;
 import com.example.pharmiczy.cache.MedicineCache;
+import com.example.pharmiczy.home.HomeActivity1;
 import com.example.pharmiczy.home.adapters.ProductAdapter;
 import com.example.pharmiczy.home.models.ProductFetch;
 import com.example.pharmiczy.loginandsignup.RetrofitClient;
@@ -89,31 +90,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         TextView warningText =findViewById(R.id.warning_text);
 
         int maxQuantity = maxx; // Set your dynamic max quantity from backend
-        int quantity;
 
-        editQuantity.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int quantity = Integer.parseInt(s.toString());
-                    if (quantity > maxQuantity) {
-                        warningText.setVisibility(View.VISIBLE);
-                    } else {
-                        warningText.setVisibility(View.GONE);
-                    }
-                } catch (NumberFormatException e) {
-                    warningText.setVisibility(View.GONE); // hide when field is empty or invalid
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
         if (product != null) {
             // Load image safely
             if (product.getImages() != null && !product.getImages().isEmpty()) {
@@ -185,7 +162,15 @@ public class ProductDetailActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(v -> {
             String token = "Bearer " + getSharedPreferences("pharmiczy_prefs", MODE_PRIVATE).getString("token", null);
             String medicineId = product != null ? product.getId() : null;
-//            int quantity = 1;
+            int quantity = 1;
+            if (quantity ==0) {
+                Toast.makeText(this, "Kindly fill the quanntity", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (quantity > maxQuantity) {
+                Toast.makeText(this, "Max allowed quantity is " + maxQuantity, Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             if (medicineId == null) {
                 Toast.makeText(this, "Invalid medicine", Toast.LENGTH_SHORT).show();
@@ -199,6 +184,11 @@ public class ProductDetailActivity extends AppCompatActivity {
                 public void onResponse(Call<CartResponse> call, Response<CartResponse> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(ProductDetailActivity.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ProductDetailActivity.this, HomeActivity1.class);
+                        intent.putExtra(HomeActivity1.OPEN_CART_FRAGMENT, true);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
+
                     } else {
                         try {
                             String error = response.errorBody() != null ? response.errorBody().string() : "Unknown error";

@@ -129,41 +129,6 @@
                                     android:fontFamily="@font/inter_semibold"/>
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:id="@+id/calci"
-                                android:layout_width="@dimen/_109sdp"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_15sdp"
-                                android:paddingVertical="@dimen/_8sdp"
-                                android:background="@drawable/background_edu"
-                                android:layout_marginStart="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_42sdp"
-                                    android:layout_height="@dimen/_42sdp"
-                                    android:contentDescription="Courses"
-                                    android:padding="@dimen/_12sdp"
-                                    app:tint="@color/white" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Calculator"
-                                    android:textSize="@dimen/_12ssp"
-                                    android:fontFamily="@font/inter_semibold"
-                                    android:layout_marginTop="@dimen/_6sdp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Medical Tools"
-                                    android:layout_marginTop="@dimen/_2sdp"
-                                    android:textSize="@dimen/_10ssp"
-
-                                    android:textColor="#797D7F"
-                                    android:fontFamily="@font/inter" />
-                            </LinearLayout>
                         </LinearLayout>
                     </HorizontalScrollView>
 
@@ -254,10 +219,11 @@
                                 android:textColor="@color/black"
                                 android:layout_weight="1"/>
 
-                            <Button
+                            <TextView
+                                android:id="@+id/poo"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:visibility="gone"
                                 android:text="View All"/>
 
                         </LinearLayout>

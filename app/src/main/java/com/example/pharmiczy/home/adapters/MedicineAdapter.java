@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.pharmiczy.DataModels.Medicine;
 import com.example.pharmiczy.R;
 import com.example.pharmiczy.home.activity.ProductDetailActivity;
@@ -41,10 +42,11 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         holder.sellingPrice.setText("₹" + medicine.getPricing().sellingPrice);
         holder.originalPrice.setText("₹" + medicine.getPricing().mrp);
         holder.itemView.setOnClickListener(v -> ProductDetailActivity.start(context, medicine));
-
+        Glide.with(context)
+                .load(medicine.getImages().get(0))
+                .into(holder.image);
         // If you're loading image from URL use Glide or Picasso
         // For now using placeholder
-        holder.image.setImageResource(R.drawable.medicine_9_svgrepo_com_3);
     }
 
     @Override

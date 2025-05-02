@@ -2,6 +2,7 @@
 package com.example.pharmiczy.home.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pharmiczy.R;
+import com.example.pharmiczy.home.activity.AllMedicines;
 import com.example.pharmiczy.home.models.Category;
 
 import java.util.List;
@@ -41,11 +43,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.categoryName.setText(category.getName());
 
         // Load image using Glide or any other library if you have URLs instead of drawable resources
-        holder.categoryImage.setImageResource(category.getImageResId());
+//        holder.categoryImage.setImageResource(category.getImageResId());
 
         // Handle item click
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(context, "Clicked on: " + category.getName(), Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(context, AllMedicines.class);
+            context.startActivity(intent);
             // Add more actions here, such as opening a new activity with details
         });
     }

@@ -39,10 +39,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Medicine product = productList.get(position);
 
-        // Load image using Glide
-//        Glide.with(context)
-//                .load(product.getImages().get(0))
-//                .into(holder.imageView);
+//         Load image using Glide
+        Glide.with(context)
+                .load(product.getImages().get(0))
+                .into(holder.imageView);
 
         holder.titleTextView.setText(product.getProductName());
         holder.descriptionTextView.setText(product.getDescription());
@@ -74,7 +74,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             priceTextView = itemView.findViewById(R.id.product_price);
             orprice=itemView.findViewById(R.id.product_original_price);
             discp=itemView.findViewById(R.id.product_discount);
-            addButton = itemView.findViewById(R.id.add_button);
+//            addButton = itemView.findViewById(R.id.add_button);
         }
     }
 }

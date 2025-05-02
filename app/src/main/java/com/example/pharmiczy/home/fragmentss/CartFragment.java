@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.pharmiczy.Apis.ApiClient;
@@ -44,6 +45,7 @@ public class CartFragment extends Fragment {
     private RecyclerView recyclerView;
     private CartAdapter adapter;
     private TextView total;
+    private LinearLayout ly5,el;
     private Button continu;
     private List<CartItem> cartItems = new ArrayList<>();
 
@@ -55,8 +57,20 @@ public class CartFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CartAdapter(cartItems, getContext());
         recyclerView.setAdapter(adapter);
+        adapter = new CartAdapter(cartItems, getContext());
+        recyclerView.setAdapter(adapter);
+
+// Set listener for empty cart
+        adapter.setCartEmptyListener(() -> {
+            recyclerView.setVisibility(View.GONE);
+            ly5.setVisibility(View.GONE);
+            el.setVisibility(View.VISIBLE);
+        });
+
         total=view.findViewById(R.id.total_cart_amount);
         fetchCartItems();
+        el=view.findViewById(R.id.empty_cart_layout);
+        ly5=view.findViewById(R.id.linearLayout5);
         continu=view.findViewById(R.id.cart_continue_btn);
         continu.setOnClickListener(v -> {
             Intent intent=new Intent(getActivity(), addAddressActivity.class);
@@ -76,7 +90,11 @@ public class CartFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     AllCartResponse cartResponse = response.body();
                     Log.d("CartFragment", "Cart fetched. Items: " + cartResponse.getItems().size());
-
+                    if(cartResponse.getItems().size()==0){
+                        recyclerView.setVisibility(View.GONE);
+                        ly5.setVisibility(View.GONE);
+                        el.setVisibility(View.VISIBLE);
+                    }
                     cartItems.clear();
                     for (CartResponse item : cartResponse.getItems()) {
                         Medicine med = item.getMedicineId();
@@ -86,6 +104,9 @@ public class CartFragment extends Fragment {
                     total.setText(String.valueOf(cartResponse.getTotalPrice()));
                     adapter.notifyDataSetChanged();
                 } else {
+                    recyclerView.setVisibility(View.GONE);
+                    ly5.setVisibility(View.GONE);
+                    el.setVisibility(View.VISIBLE);
                     Log.e("CartFragment", "Cart fetch failed. Response code: " + response.code());
                 }
             }
@@ -96,6 +117,7 @@ public class CartFragment extends Fragment {
             }
         });
     }
+
 
 
 

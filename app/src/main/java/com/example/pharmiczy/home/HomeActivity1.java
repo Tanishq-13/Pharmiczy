@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,12 +35,13 @@ import com.example.pharmiczy.home.activity.SearchActivity;
 import com.example.pharmiczy.home.fragmentss.CartFragment;
 import com.example.pharmiczy.home.fragmentss.HomeFragment;
 import com.example.pharmiczy.loginandsignup.SignupActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
 public class HomeActivity1 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    public static final String OPEN_CART_FRAGMENT = "open_cart_fragment";
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
     private static final int ORDERS_FRAGMENT = 2;
@@ -87,6 +89,23 @@ public class HomeActivity1 extends AppCompatActivity implements NavigationView.O
             View decorView = getWindow().getDecorView();
             decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         }
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.navigation_home) {
+                actionBarLogo.setVisibility(View.VISIBLE);
+                setFragment(new HomeFragment(), HOME_FRAGMENT);
+                return true;
+            } else if (id == R.id.navigation_upload) {
+                gotoFragment("Cart", new CartFragment(), CART_FRAGMENT);
+                return true;
+            } else if (id == R.id.navigation_profile) {
+                gotoFragment("My Orders", new MyOrdersFragment(), ORDERS_FRAGMENT);
+                return true;
+            }
+            return false;
+        });
+
 
         if (showCart) {
 //            drawer.setDrawerLockMode();
@@ -100,7 +119,11 @@ public class HomeActivity1 extends AppCompatActivity implements NavigationView.O
 //
             setFragment(new HomeFragment(), HOME_FRAGMENT);
         }
-
+        if (getIntent().getBooleanExtra(OPEN_CART_FRAGMENT, false)) {
+            loadCartFragment();
+        } else {
+            // load default fragment
+        }
 
 
     }
@@ -249,5 +272,13 @@ public class HomeActivity1 extends AppCompatActivity implements NavigationView.O
             fragmentTransaction.commit();
         }
 
+    }
+    public void loadCartFragment() {
+        Log.d("Recvd","lk)");
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_framelayout, new CartFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }

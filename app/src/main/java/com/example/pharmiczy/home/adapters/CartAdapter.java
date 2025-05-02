@@ -54,7 +54,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.cuttedPrice.setText("₹ " + item.getMedicine().getPricing().mrp);
         SharedPreferences sharedPreferences = context.getSharedPreferences("pharmiczy_prefs", Context.MODE_PRIVATE);
         String token = "Bearer " + sharedPreferences.getString("token", null);
-
+        Glide.with(context)
+                .load(item.getMedicine().getImages().get(0))
+                .into(holder.productImage);
         holder.cuttedPrice.setPaintFlags(holder.cuttedPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.removeItem.setOnClickListener(v -> {
 
@@ -72,6 +74,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     if (response.isSuccessful()) {
                         Toast.makeText(context, "Item removed from cart", Toast.LENGTH_SHORT).show();
                         // Optionally update UI or notify adapter
+                        int position = holder.getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            cartItems.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, cartItems.size());
+
+                            if (cartItems.isEmpty() && cartEmptyListener != null) {
+                                cartEmptyListener.onCartEmpty();
+                            }
+                        }
+
                     } else {
                         Toast.makeText(context, "Failed to remove item", Toast.LENGTH_SHORT).show();
                     }
@@ -107,5 +120,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             productQuantity = itemView.findViewById(R.id.product_quantity);
             removeItem=itemView.findViewById(R.id.remove_item_btn);
         }
+    }
+    public interface CartEmptyListener {
+        void onCartEmpty();
+    }
+    private CartEmptyListener cartEmptyListener;
+
+    public void setCartEmptyListener(CartEmptyListener listener) {
+        this.cartEmptyListener = listener;
     }
 }
