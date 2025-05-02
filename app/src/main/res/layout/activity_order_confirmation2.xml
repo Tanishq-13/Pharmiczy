@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context=".OrderConfirmationActivity2"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Success Image or Icon -->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:contentDescription="Success" />
+
+        <!-- Confirmation Message -->
+        <TextView
+            android:id="@+id/confirmation_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your order has been placed successfully!"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:padding="16dp" />
+
+        <!-- Order Details -->
+        <TextView
+            android:id="@+id/order_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order ID: #123456"
+            android:textSize="16sp"
+            android:paddingTop="8dp" />
+
+        <TextView
+            android:id="@+id/order_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date: 27 Apr 2025"
+            android:textSize="16sp"
+            android:paddingTop="4dp" />
+
+        <TextView
+            android:id="@+id/order_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total: ₹ 799"
+            android:textSize="16sp"
+            android:paddingTop="4dp" />
+
+        <!-- Back to Home Button -->
+        <Button
+            android:id="@+id/btn_go_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go to Home"
+            android:layout_marginTop="24dp" />
+
+    </LinearLayout>
+</ScrollView>
+
+
+
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/main"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
