@@ -122,7 +122,7 @@ public class HomeActivity1 extends AppCompatActivity implements NavigationView.O
         if (getIntent().getBooleanExtra(OPEN_CART_FRAGMENT, false)) {
             loadCartFragment();
         } else {
-            // load default fragmentm
+            // load default fjragmentm
         }
 
 
